@@ -7,40 +7,29 @@ namespace fixacao01
     {
         static void Main(string[] args)
         {
-            Conta novaConta;
+            Aluguel[] quartos = new Aluguel[10];
 
-            Console.Write("Digite o número da conta: ");
-            int numero = int.Parse(Console.ReadLine());
-            Console.Write("Digite o nome do titular da conta: ");
-            string nome = Console.ReadLine();
-            Console.Write("Haverá depósito inicial(s / n) ? ");
-            char depositoInicio = char.Parse(Console.ReadLine());
-            if (depositoInicio == 's' || depositoInicio == 'S')
+            Console.Write("Quantos aluguéis serão registrados ? ");
+            int N = int.Parse(Console.ReadLine());
+
+            for(int i = 0; i<N; i++)
             {
-                Console.Write("Digite o valor do depósito inicial: ");
-                double valorInicial = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                novaConta = new Conta(numero, nome, valorInicial);
-            }
-            else
-            {
-                //sobrecarga do meu construtor
-                novaConta = new Conta(numero, nome);
+                Console.WriteLine("Dados do " + i + "° aluguel: ");
+                Console.Write("Nome: ");
+                string nome = Console.ReadLine();
+                Console.Write("E-mail: ");
+                string email = Console.ReadLine();
+                Console.Write("Quarto: ");
+                int pos = int.Parse(Console.ReadLine());
+                quartos[pos] = new Aluguel(nome, email);               
             }
 
-            Console.WriteLine("\nConta criada:");
-            Console.WriteLine(novaConta);
+            Console.WriteLine("Quartos ocupados: ");
+            for(int i = 0; i<10; i++)
+            {
+                if(quartos[i] != null)
+            }
 
-            Console.Write("\nDigite um valor para depósito: ");
-            double deposito = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-            novaConta.Depositar(deposito);
-            Console.WriteLine("Conta atualizado: ");
-            Console.WriteLine(novaConta);
-
-            Console.Write("\nDigite um valor para saque: ");
-            double saque = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-            novaConta.Sacar(saque);
-            Console.WriteLine("Conta atualizado: ");
-            Console.WriteLine(novaConta);
 
             Console.ReadLine();
         }
