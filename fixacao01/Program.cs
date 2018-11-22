@@ -1,37 +1,76 @@
 ﻿using System;
 using System.Globalization;
-
+using System.Collections.Generic;
+using fixacao01.dominio;
 namespace fixacao01
 {
     class Program
     {
+
+        public static List<Produto> produtos = new List<Produto>();
+
+
         static void Main(string[] args)
         {
-            Aluguel[] quartos = new Aluguel[10];
+            int opcaoMenu = 0;
 
-            Console.Write("Quantos aluguéis serão registrados ? ");
-            int N = int.Parse(Console.ReadLine());
+            produtos.Add(new Produto(1001, "Cadeira simples", 500.00));
+            produtos.Add(new Produto(1002, "Cadeira acolchoada", 900.00));
+            produtos.Add(new Produto(1003, "Sofá de três lugares", 2000.00));
+            produtos.Add(new Produto(1004, "Mesa retangular", 1500.00));
+            produtos.Add(new Produto(1005, "Mesa retangular", 2000.00));
+            produtos.Sort();
 
-            for(int i = 0; i<N; i++)
+            while (opcaoMenu != 5)
             {
-                Console.WriteLine("Dados do " + i + "° aluguel: ");
-                Console.Write("Nome: ");
-                string nome = Console.ReadLine();
-                Console.Write("E-mail: ");
-                string email = Console.ReadLine();
-                Console.Write("Quarto: ");
-                int pos = int.Parse(Console.ReadLine());
-                quartos[pos] = new Aluguel(nome, email);               
+                Console.Clear();
+                Tela.mostrarMenu();
+
+                try
+                {
+                    opcaoMenu = int.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Erro inesperado: " + e.Message);
+                    opcaoMenu = 0;
+                }
+
+                if (opcaoMenu == 1)
+                {
+                    Tela.mostrarProdutos();
+                }
+                else if (opcaoMenu == 2)
+                {
+                    try
+                    {
+                        Tela.cadastrarProduto();
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("Erro inesperado: "+e.Message);
+                    }
+                }
+                else if (opcaoMenu == 3)
+                {
+
+                }
+                else if (opcaoMenu == 4)
+                {
+
+                }
+                else if (opcaoMenu == 5)
+                {
+                    Console.WriteLine("Fim do programa!");
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida!");
+                }
+                Console.ReadLine();
             }
 
-            Console.WriteLine("Quartos ocupados: ");
-            for(int i = 0; i<10; i++)
-            {
-                if(quartos[i] != null)
-            }
-
-
-            Console.ReadLine();
-        }
+            
+        }        
     }
 }
